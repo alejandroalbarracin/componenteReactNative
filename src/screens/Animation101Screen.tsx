@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import {View, Text, StyleSheet, Animated, Button, Easing} from 'react-native';
+import { ThemeContext } from '../context/themeContext/ThemeContext';
 import { useAnimation } from '../hooks/useAnimation';
 
 
@@ -8,6 +9,7 @@ import { useAnimation } from '../hooks/useAnimation';
 export const Animation101Screen = () => {
 
     const {fadeInt, fadeOut,startMoving,opacity, position} = useAnimation()
+    const {theme:{colors}} = useContext(ThemeContext)
     
     return(
         <View style={styles.container} >
@@ -17,7 +19,7 @@ export const Animation101Screen = () => {
                 opacity:opacity, 
                 marginBottom: 20,
                 transform:[{
-                    translateY:position
+                    translateX:position
                 }]
                 }} />
             <View>
@@ -26,10 +28,10 @@ export const Animation101Screen = () => {
                         title='FadeIn'
                         onPress={() => { 
                             fadeInt(); 
-                            startMoving(-100)
+                            startMoving(100)
                         } 
                     }
-                        
+                    color={colors.primary}                        
                     />
                 </View>
                 <View>
@@ -37,6 +39,7 @@ export const Animation101Screen = () => {
                     <Button
                         title='FadeOut'
                         onPress={fadeOut}
+                        color={colors.primary}  
                         />
                 </View>
             </View>

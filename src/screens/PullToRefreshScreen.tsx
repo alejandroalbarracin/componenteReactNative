@@ -1,13 +1,18 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 
 import { Text, View, ScrollView, RefreshControl } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import { HeaderTitle } from '../components/HeaderTitle';
+
+import { ThemeContext } from '../context/themeContext/ThemeContext';
 import { styles } from '../themes/appTheme';
 
 export const PullToRefreshScreen = () => {
 
     const {top} = useSafeAreaInsets();
+
+    const {theme:{colors, dark}} = useContext(ThemeContext)
 
     const [refreshing, setRefreshing] = useState(false);
 
@@ -23,6 +28,8 @@ export const PullToRefreshScreen = () => {
         }, 3500);
     }
 
+    
+
     return(
         <ScrollView 
             style={{
@@ -33,10 +40,10 @@ export const PullToRefreshScreen = () => {
                     refreshing={refreshing}
                     onRefresh={onRefresh}
                     progressViewOffset={10}
-                    progressBackgroundColor="green"
-                    colors={['white', 'red', 'blue']}
+                    progressBackgroundColor={colors.primary}
+                    colors={[colors.card]}
                     //style={{backgroundColor:'#585606'}}
-                    //tintColor='white'
+                    tintColor={dark ? 'white' : 'black'}
                     //title='cargando...'
                     //titleColor="white"
                 />
@@ -47,9 +54,6 @@ export const PullToRefreshScreen = () => {
                 {
                     data && <HeaderTitle title={data} />
                 }
-                
-
-                <Text>Cargando...</Text>
             </View>
         </ScrollView>
 

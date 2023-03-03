@@ -47,6 +47,16 @@ export const menuItems: MenuItem [] = [{
     name:'Infinto scroll',
     icon: 'infinite-outline',
     component:'InfiniteScrollScreen'
+},
+{
+    name:'Slides',
+    icon: 'flower-outline',
+    component:'SlidesScreens'
+},
+{
+    name:'Theme',
+    icon: 'color-palette-outline',
+    component:'ChangeThemeScreen'
 }
 
 ]

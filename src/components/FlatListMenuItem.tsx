@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { MenuItem } from '../interfaces/appInterfaces';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
+import { ThemeContext } from '../context/themeContext/ThemeContext';
 
 //import { styles } from '../themes/appTheme';
 
@@ -14,6 +15,8 @@ interface Props {
 export const FlatListMenuItem = ({menuItem}: Props ) => {
 
     const navigation = useNavigation<any>();
+    const {theme:{colors}} = useContext(ThemeContext);
+    
 
 
     return(
@@ -24,16 +27,16 @@ export const FlatListMenuItem = ({menuItem}: Props ) => {
             <View style={styles.container} >
                 <Icon
                     name={menuItem.icon}
-                    color="green"
+                    color={colors.primary}
                     size={23}
                     />
-                <Text style={styles.colorText} >{menuItem.name} </Text>
+                <Text style={{...styles.colorText,color:colors.text}} >{menuItem.name} </Text>
 
                 <View style={{flex:1}} />
 
                 <Icon
                     name="arrow-redo-circle-outline"
-                    color="green"
+                    color={colors.primary}
                     size ={23}
                     
                     />
@@ -44,7 +47,6 @@ export const FlatListMenuItem = ({menuItem}: Props ) => {
 
 const styles = StyleSheet.create({
     colorText:{
-        color:"black",
         marginLeft: 10,
         fontSize: 19
     },
